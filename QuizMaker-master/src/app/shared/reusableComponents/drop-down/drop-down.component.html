@@ -1,0 +1,16 @@
+<div class="dropDown">
+    <select [name]="name" [id]="name" (change)="onClick($event)">
+        <ng-container *ngIf="name==='categorySelect'">
+            <option  value="undefined" >Select a category</option>
+            <ng-container *ngFor="let option of options">
+                <option [value]="option.id">{{option.value}}</option>
+            </ng-container>
+        </ng-container> 
+        <ng-container  *ngIf="name==='difficultySelect'">
+            <option value="undefined">Select a difficulty</option>
+            <ng-container *ngFor="let option of options">
+                <option [value]="option.value">{{option.value}}</option>
+            </ng-container>
+        </ng-container>
+    </select>
+</div>

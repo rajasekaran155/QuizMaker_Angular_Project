@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Quiz Maker</h2>
+  <div class="row">
+    <app-drop-down
+      [name]="'categorySelect'"
+      [options]="categoryOptions"
+      (selectedValue)="categoryOption($event)"
+    >
+    </app-drop-down>
+    <app-drop-down
+      [name]="'difficultySelect'"
+      [options]="difficultyOptions"
+      (selectedValue)="difficultyOption($event)"
+    >
+    </app-drop-down>
+    <button type="submit" id="createBtn" (click)="onClickCreate()" [disabled]="selectedCategoryOption==='undefined' || selectedDifficultyOption==='undefined'?true:false">Create</button>
+  </div>
+  <div class="row">
+    <ng-container *ngIf="isQuestionSection">
+      <div class="questionContainer">
+          <ng-container *ngFor="let section of dataSource; let row = index" >
+            <p>{{ section["question"] }}</p>
+            <div>
+                <ng-container *ngFor="let option of section['options'];let col=index">
+                  <button (click)="saveAnswer(option, row, col)" [id]="'row'+row+'col'+col" class="optionButton">{{ option }}</button>
+                </ng-container>
+            </div>
+          </ng-container>
+          <div *ngIf="isEnabled" class="submitBtn">
+                <button (click)="onSubmit()">submit</button>
+          </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

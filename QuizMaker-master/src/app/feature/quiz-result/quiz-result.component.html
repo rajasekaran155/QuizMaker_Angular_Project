@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <h2>Results</h2>
+  <div class="resultContainer">
+    <ng-container *ngFor="let section of dataSource; let row = index">
+      <p>{{ section["question"] }}</p>
+      <div>
+        <ng-container *ngFor="let option of section['options']">
+           <ng-container *ngIf="option===section['selectedAnswer'] && option===section['correctAnswer']">
+                  <button [ngStyle]="{'background-color':'green'}">{{option}}</button>
+          </ng-container>
+          <ng-container *ngIf="option===section['selectedAnswer'] && option!=section['correctAnswer']">
+                  <button [ngStyle]="{'background-color':'red'}">{{option}}</button>
+          </ng-container>
+          <ng-container *ngIf="option!=section['correctAnswer'] && option!=section['selectedAnswer']">
+              <button>{{option}}</button>
+          </ng-container>
+          <ng-container *ngIf="option!=section['selectedAnswer'] && option===section['correctAnswer']">
+                  <button [ngStyle]="{'background-color':'green'}">{{option}}</button>
+          </ng-container>
+        </ng-container>
+      </div>
+    </ng-container>
+    <div class="bottomSection">
+      <p [ngStyle]="{'background-color': backgroundColor}">You scored {{score}} out of 5</p>
+      <button (click)="createQuiz()">Create a new quiz</button>
+    </div>
+  </div>
+</div>
